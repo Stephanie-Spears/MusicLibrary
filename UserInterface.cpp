@@ -4,8 +4,7 @@
 
 using namespace std;
 
-void displayMenu()
-{
+void displayMenu() {
 	cout << endl;
 	cout << "Music Library" << endl << endl;
 	cout << "1) Display all songs" << endl;
@@ -18,8 +17,7 @@ void displayMenu()
 }
 
 /*this function reads in the user's choice. */
-int readInCommand()
-{
+int readInCommand() {
 	int cmd;
 
 	cmd = readInt("Enter Menu Option: ");
@@ -33,18 +31,16 @@ int readInCommand()
 in: command
 in/out: list and listSize
 */
-void processCommand(char command, SongList& list)
-{
+void processCommand(char command, SongList& list) {
 	Song song;
 	Song deleteSong;
-	char title[MAX_CHAR];
+//	char title[MAX_CHAR];
 	char artist[MAX_CHAR];
-	char duration[MAX_CHAR];
+//	char duration[MAX_CHAR];
 	char album[MAX_CHAR];
 	int index;
 
-	switch (command)
-	{
+	switch (command) {
 	case 1: list.printAll();
 		break;
 	case 2: readInSong(song);
@@ -54,9 +50,7 @@ void processCommand(char command, SongList& list)
 			list.removeSong(index, deleteSong, song);
 		break;
 	case 4: readSearchArtist(artist);
-		if (list.searchArtist(artist, song))
-		{
-			
+		if (list.searchArtist(artist, song)) {
 		//	song.getTitle(title);
 		//	song.getArtist(artist);
 		//	song.getDuration(duration);
@@ -69,8 +63,7 @@ void processCommand(char command, SongList& list)
 		break;
 
 	case 5: readSearchAlbum(album);
-		if (list.searchAlbum(album, song))
-		{
+		if (list.searchAlbum(album, song)) {
 		//	cout << "test" << endl;
 		//	song.getTitle(title);
 		//	song.getArtist(artist);
@@ -78,8 +71,7 @@ void processCommand(char command, SongList& list)
 		//	song.getAlbum(album);
 			
 		}
-		else
-		{
+		else {
 			cout << endl << "Seach Complete." << endl << endl;
 		}
 		break;
@@ -93,8 +85,7 @@ void processCommand(char command, SongList& list)
 this function reads in a song.
 out: aSong
 */
-void readInSong(Song& aSong)
-{
+void readInSong(Song& aSong) {
 	char title[MAX_CHAR];
 	char artist[MAX_CHAR];
 	char duration[MAX_CHAR];
@@ -115,13 +106,11 @@ void readInSong(Song& aSong)
 	aSong.setAlbum(album);
 }
 
-void readSearchArtist(char artist[])
-{
+void readSearchArtist(char artist[]) {
 	readString("Enter the Artist name you'd like to search for: ", artist, MAX_CHAR); 
 }
 
-void readSearchAlbum(char album[])
-{
+void readSearchAlbum(char album[]) {
 	//if (album != nullptr)
 	readString("Enter the Album name you'd like to search for: ", album, MAX_CHAR);
 }

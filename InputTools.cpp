@@ -8,17 +8,15 @@ using namespace std;
 in: prompt
 return: a legal integer
 */
-int readInt(const char prompt[])
-{
-	int		intVal;
+int readInt(const char prompt[]) {
+	int intVal;
 
 	//prompt user for input
 	cout << endl << prompt;
 	cin >> intVal;
 
 	//check if a valid integer is entered
-	while (!cin)
-	{
+	while (!cin) {
 		//clear the error code for cin so that it can work again
 		cin.clear();
 
@@ -40,17 +38,15 @@ int readInt(const char prompt[])
 in: prompt
 return: a legal double
 */
-double readDouble(const char prompt[])
-{
-	double		doubleVal;
+double readDouble(const char prompt[]) {
+	double	doubleVal;
 
 	//prompt user for input
 	cout << endl << prompt;
 	cin >> doubleVal;
 
 	//check if a valid double is entered
-	while (!cin)
-	{
+	while (!cin) {
 		//clear the error code for cin so that it can work again
 		cin.clear();
 
@@ -72,8 +68,7 @@ double readDouble(const char prompt[])
 in: prompt
 return: a char
 */
-char readChar(const char prompt[])
-{
+char readChar(const char prompt[]) {
 	char aChar;
 
 	cout << endl << prompt;
@@ -94,14 +89,12 @@ maxChar: at most maxChar-1 characters can be stored. The rest of the input will 
 out: inputStr
 return: none
 */
-void readString(const char prompt[], char inputStr[], int maxChar)
-{
+void readString(const char prompt[], char inputStr[], int maxChar) {
 	cout << endl << prompt;
 
 	//read until it either reaches the maxChar limit or encounters a '\n'
 	cin.get(inputStr, maxChar, '\n');
-	while (!cin)
-	{
+	while (!cin) {
 		cin.clear();
 		cin.ignore(100, '\n');
 		cout << endl << prompt;

@@ -8,32 +8,25 @@
 
 using namespace std;
 
-SongList::SongList()
-{
+
+SongList::SongList() {
 	first = nullptr;
 	last = nullptr;
 	count = 0; //set size to 0, so we know there are no elements in our list
-
 }
 
-SongList::SongList(const char fileName[])
-{
-first = nullptr;
-last = nullptr;
-count = 0;
-
-
-loadSongs(fileName); //accesses the SongList class member function loadSongs with the fileName parameter
+SongList::SongList(const char fileName[]) {
+	first = nullptr;
+	last = nullptr;
+	count = 0;
+	loadSongs(fileName); //accesses the SongList class member function loadSongs with the fileName parameter
 }
-
 
 /*Destructor. It releases the memory allocated for the array.*/
-SongList::~SongList() //we set this destructor so that when we finish with our array, it will deallocate the memory the array occupied, so we don't get any memory leaks
-{
+SongList::~SongList() { //we set this destructor so that when we finish with our array, it will deallocate the memory the array occupied, so we don't get any memory leaks
 	Node * current = first;
 
-	while (first != nullptr)
-	{
+	while (first != nullptr) {
 		current = first->next;
 		delete first; //delete the node pointed to by head. The destructor for Song is invoked automatically
 		first = current;
@@ -59,8 +52,7 @@ destroyList();
 
 /* Reads the entries from the file and adds them to the list.
 in: fileName*/
-void SongList::loadSongs(const char fileName[])
-{
+void SongList::loadSongs(const char fileName[]) {
 	ifstream in;
 	char title[MAX_CHAR]; //declares local variables for us to store the contents of the file into
 	char artist[MAX_CHAR];
@@ -72,8 +64,7 @@ void SongList::loadSongs(const char fileName[])
 	Song aSong; //declares a variable of type Song (it has access to all member objects of class Song)
 
 	in.open(fileName);
-	if (!in)
-	{
+	if (!in) {
 		in.clear();
 		cerr << endl << "Failed to open filename '" << fileName << "' for input!" << endl << endl;
 		exit(1);
@@ -116,8 +107,7 @@ void SongList::loadSongs(const char fileName[])
 
 /*This function returns the size of the list.
 return: size*/
-int SongList::getSize() const
-{
+int SongList::getSize() const {
 return count;
 }
 
@@ -127,22 +117,20 @@ in: artist
 out: match
 return: true if a match is found and match will be returned through parameter.
 false if a match can not be found and match contains garbage.*/
-bool SongList::searchArtist(const char artist[], Song &match) const
-{
+bool SongList::searchArtist(const char artist[], Song &match) const {
 	Node * current;
 	char currentTitle[MAX_CHAR];
 	char currentArtist[MAX_CHAR];
 	char currentDuration[MAX_CHAR];
 	char currentAlbum[MAX_CHAR];
 
-	for (current = first; current != nullptr; current = current->next) //our current pointer is set to the beginning ("first"), while the pointer isn't empty (NULL), iterate through the list by setting current to the address of the "next" node.
-	{
+	for (current = first; current != nullptr; current = current->next){ //our current pointer is set to the beginning ("first"), while the pointer isn't empty (NULL), iterate through the list by setting current to the address of the "next" node.
 		current->data.getTitle(currentTitle);//makes the pointer "current" point to the address for "data." Data is then accessing it's Song member function (getTitle), and passing is storing the function's local variable "this->title" inside of our current function's "currentTitle" variable.
 		current->data.getArtist(currentArtist);
 		current->data.getDuration(currentDuration);
 		current->data.getAlbum(currentAlbum);
-		if (strcmp(artist, currentArtist) == 0) //checks to see if the passed in "artist" from the user is equal to our local variable "currentArtist", which is being cycled through current->data
-		{
+		if (strcmp(artist, currentArtist) == 0) {//checks to see if the passed in "artist" from the user is equal to our local variable "currentArtist", which is being cycled through current->data
+
 			match.setTitle(currentTitle); //match accesses "setTitle" and stores it's local variable "this->title" into THIS function's empty variable "currentTitle"
 			match.setArtist(currentArtist);
 			match.setDuration(currentDuration);
@@ -150,12 +138,10 @@ bool SongList::searchArtist(const char artist[], Song &match) const
 			cout << endl << currentTitle << endl << currentArtist << endl << currentDuration << endl << currentAlbum << endl << endl;
 		}
 	}
-	if (!current)
-	{
+	if (!current) {
 		return false;
 	}
-	else
-	{
+	else {
 		return true;
 	}
 }
@@ -167,22 +153,19 @@ in: album
 out: match
 return: true if a match is found and match will be returned through parameter.
 false if a match can not be found and match contains garbage.*/
-bool SongList::searchAlbum(const char album[], Song &match) const
-{
+bool SongList::searchAlbum(const char album[], Song &match) const {
 	Node * current;
 	char currentTitle[MAX_CHAR];
 	char currentArtist[MAX_CHAR];
 	char currentDuration[MAX_CHAR];
 	char currentAlbum[MAX_CHAR];
 
-	for (current = first; current != nullptr; current = current->next)
-	{
+	for (current = first; current != nullptr; current = current->next) {
 		current->data.getTitle(currentTitle);
 		current->data.getArtist(currentArtist);
 		current->data.getDuration(currentDuration);
 		current->data.getAlbum(currentAlbum);
-		if (strcmp(album, currentAlbum) == 0)
-		{
+		if (strcmp(album, currentAlbum) == 0) {
 			match.setTitle(currentTitle);
 			match.setArtist(currentArtist);
 			match.setDuration(currentDuration);
@@ -190,20 +173,17 @@ bool SongList::searchAlbum(const char album[], Song &match) const
 			cout << endl << currentTitle << endl << currentArtist << endl << currentDuration << endl << currentAlbum << endl << endl;
 		}
 	}
-	if (!current)
-	{
+	if (!current) {
 
 		return false;
 	}
-	else
-	{
+	else {
 		return true;
 	}
 }
 
 /*Prints all the entries to the standard output.*/
-void SongList::printAll() const
-{
+void SongList::printAll() const {
 	Node * current;
 
 	int index = 0;
@@ -213,8 +193,7 @@ void SongList::printAll() const
 	char duration[MAX_CHAR];
 	char album[MAX_CHAR];
 
-	for (current = first; current; current = current->next)
-	{
+	for (current = first; current; current = current->next) {
 		
 		current->data.getTitle(title);
 		current->data.getArtist(artist);
@@ -230,40 +209,35 @@ void SongList::printAll() const
 
 /* Saves the list to the external file.
 in: fileName*/
-void SongList::saveSongs(const char fileName[]) const
-{
-ofstream out;
-Node * current;
-char title[MAX_CHAR];
-char artist[MAX_CHAR];
-char duration[MAX_CHAR];
-char album[MAX_CHAR];
+void SongList::saveSongs(const char fileName[]) const {
+	ofstream out;
+	Node * current;
+	char title[MAX_CHAR];
+	char artist[MAX_CHAR];
+	char duration[MAX_CHAR];
+	char album[MAX_CHAR];
 
-out.open(fileName);
-if (!out)
-{
-out.clear();
-cerr << endl << "Failed to open filename '" << fileName << "' for output." << endl << endl;
-exit(1);
-}
+	out.open(fileName);
+	if (!out) {
+		out.clear();
+		cerr << endl << "Failed to open filename '" << fileName << "' for output." << endl << endl;
+		exit(1);
+	}
 
-for (current = first; current; current = current->next)
-{
-current->data.getTitle(title);
-current->data.getArtist(artist);
-current->data.getDuration(duration);
-current->data.getAlbum(album);
+	for (current = first; current; current = current->next) {
+		current->data.getTitle(title);
+		current->data.getArtist(artist);
+		current->data.getDuration(duration);
+		current->data.getAlbum(album);
 
-out << title << ';' << artist << ';' << duration << ';' << album << endl; //Basically what we're pushing to the file "out"
-}
-
-out.close();
+		out << title << ';' << artist << ';' << duration << ';' << album << endl; //Basically what we're pushing to the file "out"
+	}
+	out.close();
 }
 
 /* This function adds a song entry ordered by title.
 in: aSong*/
-void SongList::addSortedSong(const Song &aSong)
-{
+void SongList::addSortedSong(const Song &aSong) {
 
 	char title[MAX_CHAR];
 	char currentTitle[MAX_CHAR];
@@ -276,11 +250,9 @@ void SongList::addSortedSong(const Song &aSong)
 	Node * back = nullptr;
 	Node * current = first;
 
-	while (current)
-	{
+	while (current) {
 		current->data.getTitle(currentTitle);
-		if (strcmp(title, currentTitle) < 0)
-		{
+		if (strcmp(title, currentTitle) < 0) {
 			break;
 		}
 		back = current;
@@ -290,12 +262,10 @@ void SongList::addSortedSong(const Song &aSong)
 
 	newNode->next = current;
 
-	if (!back)
-	{
+	if (!back) {
 		first = newNode;
 	}
-	else
-	{
+	else {
 		back->next = newNode;
 	}
 	count++;
@@ -303,8 +273,7 @@ void SongList::addSortedSong(const Song &aSong)
 
 /* This function adds a song to the beginning of the list.
 in: aSong*/
-void SongList::addSong(const Song &aSong)
-{
+void SongList::addSong(const Song &aSong) {
 	addSortedSong(aSong);
 
 }
@@ -313,12 +282,10 @@ void SongList::addSong(const Song &aSong)
 in: index
 out: aSong
 return: true if the entry exists, false if illegal index is passed in*/
-bool SongList::get(int index, Song &deleteSong, Song& aSong) const
-{
+bool SongList::get(int index, Song &deleteSong, Song& aSong) const {
 	char title[MAX_CHAR];
 
-	if (index < 0 || index >= count)
-	{
+	if (index < 0 || index >= count) {
 		cout << "Index not found. " << endl;
 		return false;
 	}
@@ -326,16 +293,13 @@ bool SongList::get(int index, Song &deleteSong, Song& aSong) const
 	//traverse to the position
 	Node * current = first;
 
-	if (first == nullptr)
-	{
+	if (first == nullptr) {
 		cout << "List is empty." << endl;
 		return false;
 	}
-	else
-	{
+	else {
 
-		for (int i = 0; i < index; i++) //stops at the index we want to delete
-		{
+		for (int i = 0; i < index; i++){ //stops at the index we want to delete
 			current = current->next;
 		}
 		current->data.getTitle(title);
@@ -344,12 +308,10 @@ bool SongList::get(int index, Song &deleteSong, Song& aSong) const
 		Node * currentNode;
 		char currentTitle[MAX_CHAR];
 
-		for (currentNode = first; currentNode != nullptr; currentNode = currentNode->next)
-		{
+		for (currentNode = first; currentNode != nullptr; currentNode = currentNode->next) {
 
 			currentNode->data.getTitle(currentTitle); //going through the currentNode and assigning it data
-			if (strcmp(currentTitle, title) == 0)
-			{
+			if (strcmp(currentTitle, title) == 0) {
 			//?	delete currentNode;
 			//?	delete current;
 				return true;
@@ -362,8 +324,7 @@ bool SongList::get(int index, Song &deleteSong, Song& aSong) const
 
 /* This function removes a passed in song from the list.
 in: aSong*/
-void SongList::removeSong(int index, Song& deleteSong, Song& aSong)
-{
+void SongList::removeSong(int index, Song& deleteSong, Song& aSong) {
 	Song song;
 	Node * current;
 	Node * trailCurrent;
@@ -375,48 +336,37 @@ void SongList::removeSong(int index, Song& deleteSong, Song& aSong)
 	found = false;
 
 
-	if (get(index, deleteSong, song) == true)
-	{
-		while (current != nullptr && !found) //while current's next link isn't empty
-		{
-			if  (currentIndex == index)	//if the currentIndex equals the index we want to delete
-			{
-				
+	if (get(index, deleteSong, song) == true) {
+		while (current != nullptr && !found){ //while current's next link isn't empty
+			if  (currentIndex == index)	{//if the currentIndex equals the index we want to delete
 				found = true; //jumps out of while loop
 			}
-			else //if item wasn't found at "currentIndex" keep traversing the list. 
-			{ //this only executes if the item we want to delete isn't in the first node. so we know there is more than one node, so we can update the traversers
+			else {//if item wasn't found at "currentIndex" keep traversing the list.
+			//this only executes if the item we want to delete isn't in the first node. so we know there is more than one node, so we can update the traversers
 				trailCurrent = current; //set the prev node to the current node
 				current = current->next; //set the current node to point to the next node
 				currentIndex++;
 			}
 		}
 
-		if (current == nullptr) //if current is empty
-		{
+		if (current == nullptr) { //if current is empty
 			cout << "List has been initialized empty. Cannot delete from an empty list." << endl;
 		}
-		else
-		{
-			if (currentIndex == index) //if the item to be deleted is found at our current traversing address (currentIndex, or current->data == deleteItem)
-			{
-				if (first == current) //if the item to be deleted is in the first node
-				{
+		else {
+			if (currentIndex == index) { //if the item to be deleted is found at our current traversing address (currentIndex, or current->data == deleteItem)
+				if (first == current){ //if the item to be deleted is in the first node
 					cout << "Item to be deleted is the first in the list." << endl;
 					first = first->next; //set the new "first" node to the address of the next node. (ie. remove the first node)
-					if (first == nullptr) //if the updated first now points to an empty node
-					{
+					if (first == nullptr) { //if the updated first now points to an empty node
 						last = nullptr; //update the last pointer to empty.
 					}
 					delete current; //delete our traverser
 				}
-				else //if item to be deleted isn't in the first node
-				{
+				else { //if item to be deleted isn't in the first node
 					cout << "Item to be deleted isn't the first item in the list" << endl;
 					trailCurrent->next = current->next; //copies current's next into trailCurrent's next
 				//	if (current == last) 
-					if (index == (count-1))//if the item we want to delete is in the last node ? why doesn't the book's example if(current==last) work?
-					{
+					if (index == (count-1)) { //if the item we want to delete is in the last node ? why doesn't the book's example if(current==last) work?
 						cout << "Item to be deleted is the last in the list." << endl;
 						last = trailCurrent; //set the last address to the "one before last" node?
 					}
@@ -424,8 +374,7 @@ void SongList::removeSong(int index, Song& deleteSong, Song& aSong)
 				}
 				count--;
 			}
-			else //if the list isn't empty, but the item to be deleted isn't in it.
-			{
+			else { //if the list isn't empty, but the item to be deleted isn't in it.
 				cout << "List is not empty, but item to be deleted was not found." << endl;
 			}
 		}

@@ -7,8 +7,7 @@ Header file for class Song
 
 const int MAX_CHAR = 50;
 
-class Song
-{
+class Song {
 public:
 	//constructors
 	Song();

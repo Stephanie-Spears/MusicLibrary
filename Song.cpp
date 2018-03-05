@@ -11,8 +11,7 @@ using namespace std;
 
 /* Default constructor. It initializes the Song member objects to a default value.
 */
-Song::Song()
-{
+Song::Song() {
 	//sets the value of title to a dynamic array which is the length of "empty title"
 	//(or it can be the length of whatever variable gets passed in), and adds +1
 	//to the end to set the last char position to a null terminator (an empty spot signifying the end of the array).
@@ -68,8 +67,7 @@ Song::Song()
 /* Constructor. It initializes the title/artist/etc with the passed in value.
 in: title, artist, duration, album, 
 */
-Song::Song(const char title[], const char artist[], const char duration[], const char album[])
-{
+Song::Song(const char title[], const char artist[], const char duration[], const char album[]) {
 
 	//we use "this" pointer name because there's naming conflicts.
 	//We have title/artist, etc. passed in as parameters (ie. local variable),
@@ -116,8 +114,7 @@ Song::Song(const char title[], const char artist[], const char duration[], const
 
 /* Destructor. It releases the dynamic char array allocated for title/artist/duration/album.
 */
-Song::~Song()
-{	
+Song::~Song() {
 	if (title != nullptr)
 		delete[] title;
 	if (artist != nullptr)
@@ -192,35 +189,28 @@ Song::~Song()
 /* These functions return the title/artist, etc. of the entry through the parameter.
 out: title
 */
-void Song::getTitle(char title[]) const 
-{
-	if (islower(this->title[0]))
-	{
+void Song::getTitle(char title[]) const {
+	if (islower(this->title[0])) {
 		this->title[0] = toupper(this->title[0]);
 	}
 	strcpy(title, this->title); //strcpy(destination, source), so it's taking the member variable "this->title" and copying it into the passed in parameter "title."
 								//since the parameter is passed by value, the new value of "title" is updated in main.
 }
 
-void Song::getArtist(char artist[]) const
-{
-	if (islower(this->artist[0]))
-	{	this->artist[0] = toupper(this->artist[0]);
+void Song::getArtist(char artist[]) const {
+	if (islower(this->artist[0])) {	this->artist[0] = toupper(this->artist[0]);
 	
 	}
 
 	strcpy(artist, this->artist);
 }
 
-void Song::getDuration(char duration[]) const
-{
+void Song::getDuration(char duration[]) const {
 	strcpy(duration, this->duration);
 }
 
-void Song::getAlbum(char album[]) const
-{
-	if (islower(this->album[0]))
-	{
+void Song::getAlbum(char album[]) const {
+	if (islower(this->album[0])) {
 		this->album[0] = toupper(this->album[0]);
 	}
 	strcpy(album, this->album);
@@ -228,8 +218,7 @@ void Song::getAlbum(char album[]) const
 
 /* Prints the state of the object to stdout.
 */
-void Song::print() const //const, so it can't change the values it calls, and a const member function can only return a const pointer or reference to a member <- true?
-{
+void Song::print() const { //const, so it can't change the values it calls, and a const member function can only return a const pointer or reference to a member <- true?
 	cout << "Title: " << title << endl; //these are the member variables of class Song. They don't need to be passed in because "print()" is a member function, and all member functions have access to one another without needing to specifically pass them in.
 	cout << "Artist: " << artist << endl;
 	cout << "Duration: " << duration << endl;
@@ -239,10 +228,8 @@ void Song::print() const //const, so it can't change the values it calls, and a 
 /* Sets the title/artist, etc. to the passed in value.
 in: title/artist, etc.
 */
-void Song::setTitle(const char title[]) //takes the passed in "const char title[]" which we get from the user (after using the InputTools function for readString--to validate that the input is a usable string) OR it takes the title parameter passed in from reading the input file in Songlist::loadSongs(const char fileName[])
-{
-	if (this->title != NULL) //checks if the class member variable "title" is NOT null, meaning it checks if the mem var is empty. if it's not empty, the body executes 
-	{
+void Song::setTitle(const char title[]) { //takes the passed in "const char title[]" which we get from the user (after using the InputTools function for readString--to validate that the input is a usable string) OR it takes the title parameter passed in from reading the input file in Songlist::loadSongs(const char fileName[])
+	if (this->title != NULL) { //checks if the class member variable "title" is NOT null, meaning it checks if the mem var is empty. if it's not empty, the body executes
 		delete[] this->title; //frees the memory allocated for the pointer created by the constructor inside Song()... title = new char[strlen("empty title") +1];
 	}
 	this->title = new char[strlen(title) + 1];
@@ -253,30 +240,25 @@ void Song::setTitle(const char title[]) //takes the passed in "const char title[
 	strcpy(this->title, title); //strcpy(destination, source) -- copies the passed in variable into the member variable "this->title."
 	
 }
-void Song::setArtist(const char artist[])
-{
-	if (this->artist != NULL)
-	{
+
+void Song::setArtist(const char artist[]) {
+	if (this->artist != NULL) {
 		delete[] this->artist;
 	}
 	this->artist = new char[strlen(artist) + 1];
 	strcpy(this->artist, artist);
 }
 
-void Song::setDuration(const char duration[])
-{
-	if (this->duration != NULL)
-	{
+void Song::setDuration(const char duration[]) {
+	if (this->duration != NULL) {
 		delete[] this->duration;
 	}
 	this->duration = new char[strlen(duration) + 1];
 	strcpy(this->duration, duration);
 }
 
-void Song::setAlbum(const char album[])
-{
-	if (this->album != NULL)
-	{
+void Song::setAlbum(const char album[]) {
+	if (this->album != NULL) {
 		delete[] this->album;
 	}
 	this->album = new char[strlen(album) + 1];

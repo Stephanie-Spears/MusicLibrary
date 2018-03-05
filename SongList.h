@@ -7,8 +7,7 @@ Header file for class SongList.
 
 #include "Song.h" //includes the headerfile for class Song so that we can use it in class Songlist
 
-class SongList
-{
+class SongList {
 public:
 	//constructors
 	SongList(); //default
@@ -32,13 +31,11 @@ public:
 	void loadSongs(const char fileName[]);
 
 private:
-	struct Node 
-	{
+	struct Node {
 		Song data; //info to be stored
 		Node * next; //link which is a pointer to the "next" address in the node list
 		Node * back; //link (pointer) to the previous link's memory address.
-		Node(const Song& aData) //
-		{
+		Node(const Song& aData) {
 			char title[MAX_CHAR];
 			char artist[MAX_CHAR];
 			char duration[MAX_CHAR];
