@@ -11,7 +11,7 @@ class SongList {
 public:
 	//constructors
 	SongList(); //default
-	SongList(const char fileName[]); //with parameters (fileName[] is the path of the file to be opened and read.)
+	explicit SongList(const char fileName[]); //with parameters (fileName[] is the path of the file to be opened and read.)
 
 	//destructor
 	~SongList();

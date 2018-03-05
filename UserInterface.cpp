@@ -17,10 +17,10 @@ void displayMenu() {
 }
 
 /*this function reads in the user's choice. */
-int readInCommand() {
-	int cmd;
+char readInCommand() {
+	char cmd;
 
-	cmd = readInt("Enter Menu Option: ");
+	cmd = readChar(const_cast<char *>("Enter Menu Option: "));
 	cout << endl;
 
 	return (cmd);
@@ -41,28 +41,27 @@ void processCommand(char command, SongList& list) {
 	int index;
 
 	switch (command) {
-	case 1: list.printAll();
+	case '1': list.printAll();
 		break;
-	case 2: readInSong(song);
+	case '2': readInSong(song);
 		list.addSong(song);
 		break;
-	case 3: index = readIndex();
+	case '3': index = readIndex();
 			list.removeSong(index, deleteSong, song);
 		break;
-	case 4: readSearchArtist(artist);
+	case '4': readSearchArtist(artist);
 		if (list.searchArtist(artist, song)) {
 		//	song.getTitle(title);
 		//	song.getArtist(artist);
 		//	song.getDuration(duration);
 		//	song.getAlbum(album);
 		}
-		else
-		{
+		else {
 			cout << endl << "Seach Complete." << endl << endl;
 		}
 		break;
 
-	case 5: readSearchAlbum(album);
+	case '5': readSearchAlbum(album);
 		if (list.searchAlbum(album, song)) {
 		//	cout << "test" << endl;
 		//	song.getTitle(title);
@@ -115,8 +114,7 @@ void readSearchAlbum(char album[]) {
 	readString("Enter the Album name you'd like to search for: ", album, MAX_CHAR);
 }
 
-int readIndex()
-{
+int readIndex() {
 	int index; 
 	
 	index = readInt("Enter the song index you'd like to remove: ");

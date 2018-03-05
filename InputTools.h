@@ -7,7 +7,7 @@
 //function prototypes
 int readInt(const char prompt[]);
 double readDouble(const char prompt[]);
-char readChar(const char prompt[]);
+char readChar(char prompt[]);
 void readString(const char prompt[], char inputStr[], int maxChar);
 
 #endif

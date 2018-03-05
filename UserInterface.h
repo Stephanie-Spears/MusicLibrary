@@ -6,7 +6,7 @@
 #include "InputTools.h"
 
 void displayMenu();
-int readInCommand(); 
+char readInCommand();
 void processCommand(char command, SongList& list);
 void readInSong(Song& aSong);
 int readIndex(); //should i make this void?

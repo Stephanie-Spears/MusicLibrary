@@ -68,7 +68,7 @@ double readDouble(const char prompt[]) {
 in: prompt
 return: a char
 */
-char readChar(const char prompt[]) {
+char readChar(char prompt[]) {
 	char aChar;
 
 	cout << endl << prompt;

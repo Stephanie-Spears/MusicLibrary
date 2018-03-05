@@ -67,6 +67,8 @@ void SongList::loadSongs(const char fileName[]) {
 	if (!in) {
 		in.clear();
 		cerr << endl << "Failed to open filename '" << fileName << "' for input!" << endl << endl;
+		aSong.~Song();
+		in.close();
 		exit(1);
 	}
 
@@ -74,9 +76,7 @@ void SongList::loadSongs(const char fileName[]) {
 	aSong.setTitle(title); //Takes the line (that we just read from "in" file and stored into our local "title" variable), and passes it as a parameter to the Song member function "setTitle()"
 	/*remember, setTitle checks to see if Song member var is empty, if not, empties it, then sets the member pointer this->title = new char[strlen(title) +1] .. so it allocates a memory space just big enough to hold the passed in "title" length (+1 to be null-terminated)
 	and then it copies the contents of the passed in "title" to the member var "this->title" -- strcpy(this->title, title);*/
-	while (!in.eof()) //while there's more to be read from the input file, the above process repeats for each encapsulated element of the Song class
-	{
-		
+	while (!in.eof()) {//while there's more to be read from the input file, the above process repeats for each encapsulated element of the Song class
 		in.getline(artist, MAX_CHAR, ';');
 		aSong.setArtist(artist);
 		in.getline(duration, MAX_CHAR, ';');
@@ -108,7 +108,7 @@ void SongList::loadSongs(const char fileName[]) {
 /*This function returns the size of the list.
 return: size*/
 int SongList::getSize() const {
-return count;
+	return count;
 }
 
 

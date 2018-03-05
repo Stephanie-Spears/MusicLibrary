@@ -18,14 +18,14 @@ int main() {
     //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
     char command;
-    char fileName[] = "songs.txt";
+    char fileName[] = "/Users/wolfmac/CLionProjects/MusicLibrary/songs.txt";
     SongList list(fileName);
     Song aSong;
 
     displayMenu();
     command = readInCommand();
 
-    while (command != 6) {
+    while (command != '6') {
         processCommand(command, list);
         displayMenu();
         command = readInCommand();

@@ -115,14 +115,10 @@ Song::Song(const char title[], const char artist[], const char duration[], const
 /* Destructor. It releases the dynamic char array allocated for title/artist/duration/album.
 */
 Song::~Song() {
-	if (title != nullptr)
-		delete[] title;
-	if (artist != nullptr)
-		delete[] artist;
-	if (duration != nullptr)
-		delete[] duration;
-	if (album != nullptr)
-		delete[] album;
+	delete[] title;
+	delete[] artist;
+	delete[] duration;
+	delete[] album;
 
 	/*NOTES:
 	the constructors get invoked when the objects get created (ie. new char/new int, etc).
@@ -191,15 +187,15 @@ out: title
 */
 void Song::getTitle(char title[]) const {
 	if (islower(this->title[0])) {
-		this->title[0] = toupper(this->title[0]);
+		this->title[0] = static_cast<char>(toupper(this->title[0]));
 	}
 	strcpy(title, this->title); //strcpy(destination, source), so it's taking the member variable "this->title" and copying it into the passed in parameter "title."
 								//since the parameter is passed by value, the new value of "title" is updated in main.
 }
 
 void Song::getArtist(char artist[]) const {
-	if (islower(this->artist[0])) {	this->artist[0] = toupper(this->artist[0]);
-	
+	if (islower(this->artist[0])) {
+		this->artist[0] = static_cast<char>(toupper(this->artist[0]));
 	}
 
 	strcpy(artist, this->artist);
@@ -211,7 +207,7 @@ void Song::getDuration(char duration[]) const {
 
 void Song::getAlbum(char album[]) const {
 	if (islower(this->album[0])) {
-		this->album[0] = toupper(this->album[0]);
+		this->album[0] = static_cast<char>(toupper(this->album[0]));
 	}
 	strcpy(album, this->album);
 }
@@ -229,7 +225,7 @@ void Song::print() const { //const, so it can't change the values it calls, and 
 in: title/artist, etc.
 */
 void Song::setTitle(const char title[]) { //takes the passed in "const char title[]" which we get from the user (after using the InputTools function for readString--to validate that the input is a usable string) OR it takes the title parameter passed in from reading the input file in Songlist::loadSongs(const char fileName[])
-	if (this->title != NULL) { //checks if the class member variable "title" is NOT null, meaning it checks if the mem var is empty. if it's not empty, the body executes
+	if (this->title != nullptr) { //checks if the class member variable "title" is NOT null, meaning it checks if the mem var is empty. if it's not empty, the body executes
 		delete[] this->title; //frees the memory allocated for the pointer created by the constructor inside Song()... title = new char[strlen("empty title") +1];
 	}
 	this->title = new char[strlen(title) + 1];
@@ -242,7 +238,7 @@ void Song::setTitle(const char title[]) { //takes the passed in "const char titl
 }
 
 void Song::setArtist(const char artist[]) {
-	if (this->artist != NULL) {
+	if (this->artist != nullptr) {
 		delete[] this->artist;
 	}
 	this->artist = new char[strlen(artist) + 1];
@@ -250,7 +246,7 @@ void Song::setArtist(const char artist[]) {
 }
 
 void Song::setDuration(const char duration[]) {
-	if (this->duration != NULL) {
+	if (this->duration != nullptr) {
 		delete[] this->duration;
 	}
 	this->duration = new char[strlen(duration) + 1];
@@ -258,7 +254,7 @@ void Song::setDuration(const char duration[]) {
 }
 
 void Song::setAlbum(const char album[]) {
-	if (this->album != NULL) {
+	if (this->album != nullptr) {
 		delete[] this->album;
 	}
 	this->album = new char[strlen(album) + 1];
