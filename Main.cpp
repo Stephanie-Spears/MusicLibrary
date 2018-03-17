@@ -12,6 +12,10 @@
 #include "SongList.h"
 
 using namespace std;
+//TODO: clean up unused imports, separate headers and implementations more cleanly
+// note for compilation/memleak check
+// valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all -v /Users/wolfmac/clionprojects/musiclibrary/app
+//g++ -Wall *.cpp -o app
 
 int main() {
     //enable memory leak detection tools
